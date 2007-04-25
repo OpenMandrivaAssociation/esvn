@@ -1,13 +1,14 @@
-%define name esvn
-%define version 0.6.11
-%define release %mkrel 6
+%define name 				esvn
+%define version 			0.7.0
+%define svn					svn1263
+%define release				%mkrel 0.%svn.1
 %define summary The eSvn is a cross-platform (QT-based) GUI for Subversion
 
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Summary: %{summary}
-Source: http://esvn.umputun.com/%{name}-%{version}-1.tar.bz2
+Source:   %{name}-%{svn}.tar.bz2
 Source11: %{name}-16x16.png
 Source12: %{name}-32x32.png
 Source13: %{name}-48x48.png
@@ -28,8 +29,8 @@ Subversion revision system.
 %prep
 rm -rf %{buildroot}
 
-%setup -qn %{name}
-%patch0 -p0
+%setup -qn %{name}-%{svn}
+# %patch0 -p0
 
 %build
 %make
