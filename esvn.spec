@@ -16,7 +16,6 @@ Patch0: %{name}_fix_cmd_lineedit.patch
 
 Group: Development/KDE and Qt
 URL: http://esvn.umputun.com/
-BuildRoot: %{_tmppath}/%{name}-buildroot
 License: GPL
 BuildRequires: qt3-devel
 BuildRequires: dos2unix
