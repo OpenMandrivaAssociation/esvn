@@ -53,17 +53,6 @@ install -m644 %{SOURCE12} %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} %{buildroot}%{_liconsdir}/%{name}.png
 
 # Create and install menu file
-install -d %{buildroot}%{_menudir}
-cat << EOF > %{buildroot}%{_menudir}/%{name}
-?package(%{name}): \
-needs="x11" \
-title="ESvn" \
-longtitle="The eSvn is a cross-platform (QT-based) GUI for Subversion" \
-command="%{_bindir}/%{name}" \
-icon="%{name}.png" \
-section="More Applications/Development/Tools" \
-xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -93,7 +82,6 @@ rm -rf $RPM_BUILD_ROOT $RPM_BUILD_DIR/%{name}-%{version}
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %defattr(-,root,root,0755)
 %{_bindir}/%{name}
