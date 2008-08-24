@@ -1,23 +1,19 @@
-%define name 				esvn
-%define version 			0.7.0
-%define svn					svn1263
-%define release				%mkrel 0.%svn.1
+%define name    esvn
+%define version 0.6.12
+%define release %mkrel 1
+%define epoch   1
 %define summary The eSvn is a cross-platform (QT-based) GUI for Subversion
 
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Summary: %{summary}
-Source:   %{name}-%{svn}.tar.bz2
-Source11: %{name}-16x16.png
-Source12: %{name}-32x32.png
-Source13: %{name}-48x48.png
-Patch0: %{name}_fix_cmd_lineedit.patch
-
-Group: Development/KDE and Qt
-URL: http://esvn.umputun.com/
+Summary:   %{summary}
+Name:      %{name}
+Version:   %{version}
+Release:   %{release}
+Epoch:     %{epoch}
+License:   GPLv2+
+Source:    %{name}-%{version}-1.tar.gz
+Group:     Development/KDE and Qt
+URL:       http://esvn.umputun.com/
 BuildRoot: %{_tmppath}/%{name}-buildroot
-License: GPL
 BuildRequires: qt3-devel
 BuildRequires: dos2unix
 Requires: subversion
@@ -27,33 +23,30 @@ The eSvn is a cross-platform (QT-based) GUI frontend for the
 Subversion revision system.
 
 %prep
-rm -rf %{buildroot}
+%setup -qn %{name}
 
-%setup -qn %{name}-%{svn}
-# %patch0 -p0
 
 %build
+perl -i -pe 's|qmake|/usr/lib/qt3/bin/qmake|g' Makefile
 %make
-#qmake -o Makefile esvn.pro
-#perl -pi -e 's|-lqt|-lqt-mt|g' Makefile
-#QTDIR=/usr/lib/qt3 make 
+
 
 %install
+rm -Rf $RPM_BUILD_ROOT
 mkdir -p %{buildroot}%{_bindir}
 install -m755 esvn %{buildroot}%{_bindir}/%{name}
 install -m755 esvn-diff-wrapper %{buildroot}%{_bindir}
-dos2unix COPYING
+dos2unix -U COPYING
 
 # Install icon files
 install -d %{buildroot}%{_miconsdir}
 install -d %{buildroot}%{_iconsdir}
 install -d %{buildroot}%{_liconsdir}
-install -m644 %{SOURCE11} %{buildroot}%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} %{buildroot}%{_liconsdir}/%{name}.png
+install -m644 %{name}.png %{buildroot}%{_miconsdir}/%{name}.png
+install -m644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
+install -m644 %{name}.png %{buildroot}%{_liconsdir}/%{name}.png
 
 # Create and install menu file
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -67,8 +60,10 @@ StartupNotify=true
 Categories=Qt;X-MandrivaLinux-MoreApplications-Development-Tools;Development;RevisionControl;
 EOF
 
+
 %clean
-rm -rf $RPM_BUILD_ROOT $RPM_BUILD_DIR/%{name}-%{version}
+rm -Rf $RPM_BUILD_ROOT
+
 
 %if %mdkversion < 200900
 %post
@@ -90,4 +85,3 @@ rm -rf $RPM_BUILD_ROOT $RPM_BUILD_DIR/%{name}-%{version}
 %defattr(-,root,root,0755)
 %{_bindir}/%{name}
 %{_bindir}/esvn-diff-wrapper
-
