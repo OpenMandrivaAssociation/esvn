@@ -1,6 +1,6 @@
 %define name    esvn
 %define version 0.6.12
-%define release %mkrel 1
+%define release %mkrel 2
 %define epoch   1
 %define summary The eSvn is a cross-platform (QT-based) GUI for Subversion
 
