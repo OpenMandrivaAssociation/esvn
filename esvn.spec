@@ -36,7 +36,7 @@ rm -Rf $RPM_BUILD_ROOT
 mkdir -p %{buildroot}%{_bindir}
 install -m755 esvn %{buildroot}%{_bindir}/%{name}
 install -m755 esvn-diff-wrapper %{buildroot}%{_bindir}
-dos2unix -U COPYING
+dos2unix COPYING
 
 # Install icon files
 install -d %{buildroot}%{_miconsdir}
