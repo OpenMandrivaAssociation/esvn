@@ -5,7 +5,7 @@ Release:	5
 Epoch:		1
 License:	GPLv2+
 Group:		Development/KDE and Qt
-URL:		http://esvn.umputun.com/
+URL:		https://esvn.umputun.com/
 Source:		%{name}-%{version}-1.tar.gz
 BuildRequires: qt3-devel
 BuildRequires: dos2unix
