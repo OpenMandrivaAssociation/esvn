@@ -7,6 +7,7 @@ License:	GPLv2+
 Group:		Development/KDE and Qt
 URL:		https://esvn.umputun.com/
 Source:		%{name}-%{version}-1.tar.gz
+BuildRequires:	make
 BuildRequires: qt3-devel
 BuildRequires: dos2unix
 Requires:	subversion
